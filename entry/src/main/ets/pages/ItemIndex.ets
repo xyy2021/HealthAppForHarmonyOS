@@ -4,6 +4,7 @@ import ItemCard from '../view/Item/ItemCard'
 import ItemList from '../view/Item/ItemList'
 import ItemPanelHeader from '../view/Item/ItemPanelHeader'
 import NumberKeyboard from '../view/Item/NumberKeyboard'
+import RecordItem from '../viewmodel/RecordItem'
 
 @Entry
 @Component
@@ -11,11 +12,13 @@ struct ItemIndex {
   @State showPanel: boolean = false
   @State amount: number = 1
   @State value: string = ''
+  @State item: RecordItem = null
 
-  onPanelShow() {
+  onPanelShow(item: RecordItem) {
     this.amount = 1
     this.value = ''
     this.showPanel = true
+    this.item = item
   }
 
   build() {
@@ -31,7 +34,9 @@ struct ItemIndex {
         //1
         ItemPanelHeader()
         //2
-        ItemCard({ amount: this.amount })
+        if (this.item) {
+          ItemCard({ amount: this.amount, item: $item })
+        }
         //3
         NumberKeyboard({ amount: $amount, value: $value })
         //4

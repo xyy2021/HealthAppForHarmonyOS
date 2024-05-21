@@ -1,5 +1,6 @@
+import GroupInfo from '../viewmodel/GroupInfo'
 import RecordItem from '../viewmodel/RecordItem'
-import { FoodCategoryEnum, WorkoutCategoryEnum } from './ItemCategoryModel'
+import { FoodCategories, FoodCategoryEnum, WorkoutCategories, WorkoutCategoryEnum } from './ItemCategoryModel'
 
 // import GroupInfo from '../viewmodel/GroupInfo'
 
@@ -53,6 +54,17 @@ const workouts: RecordItem[] = [
 class ItemModel {
   list(isFood: boolean = true): RecordItem[] {
     return isFood ? foods : workouts
+  }
+
+  listItemGroupByCategory(isFood: boolean = true) {
+    let categories = isFood ? FoodCategories : WorkoutCategories
+    let items = isFood ? foods : workouts
+    //1.创建空的分组
+
+    let groups = categories.map(itemCategory => new GroupInfo(itemCategory, []))
+    //2。遍历食物列表，将事物添加到对应的分组
+    items.forEach(item => groups[item.categoryId].items.push(item))
+    return groups
   }
 }
 
