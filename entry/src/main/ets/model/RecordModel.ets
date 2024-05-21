@@ -14,6 +14,9 @@ const CREATE_TABLE_SQL: string = `
 
 
 class RecordModel {
+  getCreateTableSql(): string {
+    return CREATE_TABLE_SQL
+  }
 }
 
 let recordModel = new RecordModel()
