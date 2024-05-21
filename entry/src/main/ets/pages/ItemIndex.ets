@@ -3,14 +3,18 @@ import { CommonConstants } from '../common/constants/CommonConstants'
 import ItemCard from '../view/Item/ItemCard'
 import ItemList from '../view/Item/ItemList'
 import ItemPanelHeader from '../view/Item/ItemPanelHeader'
+import NumberKeyboard from '../view/Item/NumberKeyboard'
 
 @Entry
 @Component
 struct ItemIndex {
   @State showPanel: boolean = false
   @State amount: number = 1
+  @State value: string = ''
 
   onPanelShow() {
+    this.amount = 1
+    this.value = ''
     this.showPanel = true
   }
 
@@ -29,8 +33,23 @@ struct ItemIndex {
         //2
         ItemCard({ amount: this.amount })
         //3
+        NumberKeyboard({ amount: $amount, value: $value })
         //4
-
+        Row({ space: CommonConstants.SPACE_10 }) {
+          Button('取消')
+            .width(120)
+            .backgroundColor($r('app.color.light_gray'))
+            .type(ButtonType.Normal)
+            .borderRadius(6)
+            .onClick(() => this.showPanel = false)
+          Button('提交')
+            .width(120)
+            .backgroundColor($r('app.color.primary_color'))
+            .type(ButtonType.Normal)
+            .borderRadius(6)
+            .onClick(() => this.showPanel = false)
+        }
+        .margin({ top: 10 })
 
       }
       .mode(PanelMode.Full)

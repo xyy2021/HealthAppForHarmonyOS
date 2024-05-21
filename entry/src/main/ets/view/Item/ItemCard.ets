@@ -43,7 +43,7 @@ export default struct ItemCard {
   NutrientInfo(label: string, value: number) {
     Column({ space: CommonConstants.SPACE_8 }) {
       Text(label).fontSize(14).fontColor($r('app.color.light_gray'))
-      Text(value.toFixed(1)).fontSize(18).fontWeight(CommonConstants.FONT_WEIGHT_700)
+      Text((value * this.amount).toFixed(1)).fontSize(18).fontWeight(CommonConstants.FONT_WEIGHT_700)
     }
   }
 }
