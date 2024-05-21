@@ -19,7 +19,7 @@ export default struct ItemList {
           this.TabContants(group.items)
         }.tabBar(group.type.name)
       })
-
+//
 
     }
     .width(CommonConstants.THOUSANDTH_940)
